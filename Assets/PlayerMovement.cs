@@ -18,18 +18,28 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = joystick.Horizontal * runSpeed;
+
+        if(joystick.Horizontal >= .2f)
+        {
+            horizontalMove = runSpeed;
+        } else if(joystick.Horizontal <= .2f)
+        {
+            horizontalMove = -runSpeed;
+        } else
+        {
+            horizontalMove = 0f;
+        }
+
+        //horizontalMove = joystick.Horizontal * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-
 
 
     }
 
     void FixedUpdate()
     {
-        controller.Move(horizontalMove, false, false);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
     }
-
     
 }
