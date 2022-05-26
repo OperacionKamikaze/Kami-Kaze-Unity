@@ -310,6 +310,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4320120375326016394, guid: ef19089bf382ce04c9a27c2c6b2ba292, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4320120375326016395, guid: ef19089bf382ce04c9a27c2c6b2ba292, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 1
@@ -1343,7 +1347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978335456f5dfbf4dba579b86d6b6660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  controller: {fileID: 642981852}
   animator: {fileID: 642981851}
   joystick: {fileID: 555976748}
   runSpeed: 40
@@ -1352,6 +1356,34 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4320120375326016395, guid: ef19089bf382ce04c9a27c2c6b2ba292, type: 3}
   m_PrefabInstance: {fileID: 673469838}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &642981852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642981847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094e3fcfdb08d8c4784c47bcf1f63968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_JumpForce: 400
+  m_CrouchSpeed: 0.36
+  m_MovementSmoothing: 0.05
+  m_AirControl: 0
+  m_WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GroundCheck: {fileID: 563318459}
+  m_CeilingCheck: {fileID: 835448264}
+  m_CrouchDisableCollider: {fileID: 0}
+  OnLandEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCrouchEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &673469838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1570,6 +1602,10 @@ PrefabInstance:
     - target: {fileID: 4320120375326016393, guid: ef19089bf382ce04c9a27c2c6b2ba292, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320120375326016394, guid: ef19089bf382ce04c9a27c2c6b2ba292, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4320120375326016395, guid: ef19089bf382ce04c9a27c2c6b2ba292, type: 3}
       propertyPath: m_ApplyRootMotion
