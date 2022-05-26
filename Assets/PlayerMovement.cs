@@ -19,12 +19,14 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        if(joystick.Horizontal >= .2f)
+        if (joystick.Horizontal >= .2f)
         {
-            horizontalMove = runSpeed;
-        } else if(joystick.Horizontal <= .2f)
+            //horizontalMove = runSpeed;
+            transform.Translate(new Vector3(.01f, .0f));
+        } else if (joystick.Horizontal <= -.2f)
         {
-            horizontalMove = -runSpeed;
+            //horizontalMove = -runSpeed;
+            transform.Translate(new Vector3(-.01f, .0f));
         } else
         {
             horizontalMove = 0f;
@@ -32,14 +34,14 @@ public class PlayerMovement : MonoBehaviour
 
         //horizontalMove = joystick.Horizontal * runSpeed;
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        //animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
 
     }
 
-    void FixedUpdate()
+    public void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
     }
     
 }
