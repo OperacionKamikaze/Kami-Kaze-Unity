@@ -15,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
+    public GameObject hitBox;
+
+    public Transform hitBoxPosition;
+
     // Update is called once per frame
     void Update()
     {
@@ -32,10 +36,7 @@ public class PlayerMovement : MonoBehaviour
             horizontalMove = 0f;
         }
 
-        //horizontalMove = joystick.Horizontal * runSpeed;
-
-        //animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-
+        
 
     }
 
@@ -44,4 +45,18 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
     }
     
+    public void attack()
+    {
+        animator.SetBool("attack", true);
+    }
+
+    public void attackFalse()
+    {
+        animator.SetBool("attack", false);
+    }
+
+    public void executeAttack()
+    {
+        Instantiate(hitBox, hitBoxPosition.position, hitBoxPosition.rotation);
+    }
 }
