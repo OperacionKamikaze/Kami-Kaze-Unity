@@ -1,3 +1,6 @@
+using System.Transactions;
+using System;
+//using System.Threading.Tasks.Dataflow;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +12,24 @@ public class PlayerMovement : MonoBehaviour
 
     public Joystick joystick;
 
-    public float runSpeed = 40f;
+    // public float runSpeed = 20f;
 
     float horizontalMove = 0f;
     bool jump = false;
     bool crouch = false;
 
+    public float speed;
+
     public GameObject hitBox;
 
     public Transform hitBoxPosition;
+
+    public float maxLife;
+    public float currentLife;
+
+    void Start() {
+        maxLife = currentLife;
+    }
 
     // Update is called once per frame
     void Update()
@@ -25,18 +37,18 @@ public class PlayerMovement : MonoBehaviour
 
         if (joystick.Horizontal >= .2f)
         {
-            //horizontalMove = runSpeed;
-            transform.Translate(new Vector3(.01f, .0f));
+            transform.Translate(new Vector3(.02f, .0f) * speed);
         } else if (joystick.Horizontal <= -.2f)
         {
-            //horizontalMove = -runSpeed;
-            transform.Translate(new Vector3(-.01f, .0f));
+            transform.Translate(new Vector3(-.02f, .0f) * speed);
         } else
         {
             horizontalMove = 0f;
         }
 
-        
+        Vector3 clampedPosition = transform.position;
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -13, 13);
+        transform.position = clampedPosition;
 
     }
 
