@@ -12,12 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Joystick joystick;
 
-    // public float runSpeed = 20f;
-
     float horizontalMove = 0f;
-    bool jump = false;
-    bool crouch = false;
-
     public float speed;
 
     public GameObject hitBox;
@@ -54,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void FixedUpdate()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
     }
     
     public void attack()
