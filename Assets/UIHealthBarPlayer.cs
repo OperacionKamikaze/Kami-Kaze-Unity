@@ -19,6 +19,6 @@ public class UIHealthBarPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthbar.fillAmount = player.currentLife/player.maxLife;
+        healthbar.fillAmount = player.currentLife / player.maxLife;
     }
 }

@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector3 clampedPosition = transform.position;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -13, 13);
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -12, 12);
         transform.position = clampedPosition;
 
     }
@@ -52,12 +52,12 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
     }
     
-    public void attack()
+    public void attackPlayer()
     {
         animator.SetBool("attack", true);
     }
 
-    public void attackFalse()
+    public void attackFalsePlayer()
     {
         animator.SetBool("attack", false);
     }

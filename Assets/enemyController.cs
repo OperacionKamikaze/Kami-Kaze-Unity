@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class enemyController : MonoBehaviour
 {
+    public Animator animator;
+    public GameObject hitBox;
+    public Transform hitBoxPosition;
 
     public bool rightMovement; 
 
     public float countMovement;
 
-    public int life;
-
     public float speed;
+
+    public float maxLife;
+    public float currentLife;
 
     // Start is called before the first frame update
     void Start()
     {
         countMovement = Random.Range(1, 3);
+        maxLife = currentLife;
     }
 
     // Update is called once per frame
@@ -29,10 +34,10 @@ public class enemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "HitBoxPlayer")
         {
-            life--;
+            currentLife--;
             Destroy(collision.gameObject);
 
-            if(life <= 0)
+            if(currentLife <= 0)
             {
                 Destroy(gameObject);
             }
@@ -50,13 +55,30 @@ public class enemyController : MonoBehaviour
         if(countMovement <= 0){
             rightMovement = !rightMovement;
             countMovement = Random.Range(1, 4.5f);
+            attackEnemy();
         }else{
             countMovement -= Time.deltaTime;
+            attackEnemy();
         }
 
         Vector3 clampedPosition = transform.position;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -13, 13);
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, -12, 12);
         transform.position = clampedPosition;
 
+    }
+
+    public void attackEnemy()
+    {
+        animator.SetBool("attackEnemy", true);
+    }
+
+    public void attackFalseEnemy()
+    {
+        animator.SetBool("attackEnemy", false);
+    }
+
+    public void executeAttackEnemy()
+    {
+        Instantiate(hitBox, hitBoxPosition.position, hitBoxPosition.rotation);
     }
 }

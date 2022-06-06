@@ -4369,7 +4369,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.95
-    functionName: attackFalse
+    functionName: attackFalsePlayer
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

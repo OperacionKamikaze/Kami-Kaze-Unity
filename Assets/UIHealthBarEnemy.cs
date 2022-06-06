@@ -6,10 +6,9 @@ using UnityEngine;
 
 public class UIHealthBarEnemy : MonoBehaviour
 {
-
     public Image healthbar;
 
-    public PlayerMovement player;
+    public enemyController enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +19,6 @@ public class UIHealthBarEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthbar.fillAmount = player.currentLife / player.maxLife;
+        healthbar.fillAmount = enemy.currentLife / enemy.maxLife;
     }
 }
