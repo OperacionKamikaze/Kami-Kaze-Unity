@@ -30,6 +30,7 @@ public class enemyController : MonoBehaviour
     void Update()
     {
         randomMovement();
+        randomAttack();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -47,35 +48,29 @@ public class enemyController : MonoBehaviour
 
     }
 
-    public void randomMovement(){
-        if(rightMovement == true){
+    public void randomMovement()
+    {
+        if (rightMovement == true)
+        {
             transform.position += transform.right * Time.deltaTime * speed;
             animator.SetBool("moveRight", true);
             animator.SetBool("moveLeft", false);
         }
-        else{
+        else
+        {
             transform.position -= transform.right * Time.deltaTime * speed;
             animator.SetBool("moveLeft", true);
             animator.SetBool("moveRight", false);
         }
 
-        if(countMovement <= 0){
+        if (countMovement <= 0)
+        {
             rightMovement = !rightMovement;
             countMovement = Random.Range(1, 4.5f);
-        }else{
-            countMovement -= Time.deltaTime;
         }
-
-        if (countAttack > 0f)
+        else
         {
-            countAttack -= Time.deltaTime;
-            if (countAttack <= 0f)
-            {
-                attackEnemy();
-            }
-        }else if(countAttack <= 0f)
-        {
-            attackEnemy();
+            countMovement -= Time.deltaTime;
         }
 
         Vector3 clampedPosition = transform.position;
@@ -84,10 +79,30 @@ public class enemyController : MonoBehaviour
 
     }
 
+    public void randomAttack()
+    {
+
+        if (countAttack > 0)
+        {
+            countAttack -= Time.deltaTime;
+            if (countAttack <= 0)
+            {
+                attackEnemy();
+                attackFalseEnemy();
+            }
+        }
+        else if (countAttack <= 0)
+        {
+            attackEnemy();
+            
+            attackFalseEnemy();
+        }
+    }
+
     public void attackEnemy()
     {
-        animator.SetBool("attackEnemy", true);
-        print(countAttack.ToString());
+        animator.Play("StickmanAttackR");
+        countAttack = Random.Range(1, 3);
     }
 
     public void attackFalseEnemy()
@@ -98,6 +113,6 @@ public class enemyController : MonoBehaviour
     public void executeAttackEnemy()
     {
         Instantiate(hitBox, hitBoxPosition.position, hitBoxPosition.rotation);
-        countAttack = Random.Range(1, 3);
+        
     }
 }
