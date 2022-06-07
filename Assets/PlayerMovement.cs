@@ -33,17 +33,38 @@ public class PlayerMovement : MonoBehaviour
         if (joystick.Horizontal >= .2f)
         {
             transform.Translate(new Vector3(.02f, .0f) * speed);
+            animator.SetBool("moveRight", true);
+            animator.SetBool("moveLeft", false);
         } else if (joystick.Horizontal <= -.2f)
-        {
+        { 
             transform.Translate(new Vector3(-.02f, .0f) * speed);
+            animator.SetBool("moveLeft", true);
+            animator.SetBool("moveRight", false);
         } else
         {
+            animator.SetBool("moveRight", false);
+            animator.SetBool("moveLeft", false);
             horizontalMove = 0f;
         }
 
         Vector3 clampedPosition = transform.position;
         clampedPosition.x = Mathf.Clamp(clampedPosition.x, -12, 12);
         transform.position = clampedPosition;
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "HitBoxPlayer")
+        {
+            currentLife--;
+            Destroy(collision.gameObject);
+
+            if (currentLife <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
 
     }
 

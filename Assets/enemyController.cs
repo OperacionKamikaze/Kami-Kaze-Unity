@@ -11,6 +11,7 @@ public class enemyController : MonoBehaviour
     public bool rightMovement; 
 
     public float countMovement;
+    public float countAttack;
 
     public float speed;
 
@@ -21,6 +22,7 @@ public class enemyController : MonoBehaviour
     void Start()
     {
         countMovement = Random.Range(1, 3);
+        countAttack = Random.Range(1, 3);
         maxLife = currentLife;
     }
 
@@ -48,16 +50,31 @@ public class enemyController : MonoBehaviour
     public void randomMovement(){
         if(rightMovement == true){
             transform.position += transform.right * Time.deltaTime * speed;
-        }else{
+            animator.SetBool("moveRight", true);
+            animator.SetBool("moveLeft", false);
+        }
+        else{
             transform.position -= transform.right * Time.deltaTime * speed;
+            animator.SetBool("moveLeft", true);
+            animator.SetBool("moveRight", false);
         }
 
         if(countMovement <= 0){
             rightMovement = !rightMovement;
             countMovement = Random.Range(1, 4.5f);
-            attackEnemy();
         }else{
             countMovement -= Time.deltaTime;
+        }
+
+        if (countAttack > 0f)
+        {
+            countAttack -= Time.deltaTime;
+            if (countAttack <= 0f)
+            {
+                attackEnemy();
+            }
+        }else if(countAttack <= 0f)
+        {
             attackEnemy();
         }
 
@@ -70,6 +87,7 @@ public class enemyController : MonoBehaviour
     public void attackEnemy()
     {
         animator.SetBool("attackEnemy", true);
+        print(countAttack.ToString());
     }
 
     public void attackFalseEnemy()
@@ -80,5 +98,6 @@ public class enemyController : MonoBehaviour
     public void executeAttackEnemy()
     {
         Instantiate(hitBox, hitBoxPosition.position, hitBoxPosition.rotation);
+        countAttack = Random.Range(1, 3);
     }
 }

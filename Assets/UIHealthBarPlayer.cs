@@ -10,6 +10,8 @@ public class UIHealthBarPlayer : MonoBehaviour
 
     public PlayerMovement player;
 
+    public Text winText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +22,9 @@ public class UIHealthBarPlayer : MonoBehaviour
     void Update()
     {
         healthbar.fillAmount = player.currentLife / player.maxLife;
+        if(player.currentLife <=0)
+        {
+            winText.text = "YOU LOOSE";
+        }
     }
 }
