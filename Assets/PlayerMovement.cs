@@ -3,6 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Firebase.Database;
+using Firebase.Extensions;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -21,8 +25,38 @@ public class PlayerMovement : MonoBehaviour
     public float maxLife;
     public float currentLife;
 
+    DatabaseReference reference;
+
     void Start() {
-        maxLife = currentLife;
+
+        FirebaseDatabase database = FirebaseDatabase.DefaultInstance;
+        reference = database.RootReference;
+
+        maxLife = 5;
+        currentLife = maxLife;
+        
+        reference.Child("users").Child("pepito").GetValueAsync().ContinueWith(task =>
+        {
+            if(task.IsCompleted)
+            {
+                DataSnapshot snap = task.Result;
+                //maxLife = (float)snap.Child("vida").Value;
+                int ataque = int.Parse(snap.Child("ataque").Value.ToString());
+                int defensa = int.Parse(snap.Child("defensa").Value.ToString());
+                int experiencia = int.Parse(snap.Child("experiencia").Value.ToString());
+                int oro = int.Parse(snap.Child("oro").Value.ToString());
+                int velocidad = int.Parse(snap.Child("velocidad").Value.ToString());
+                int vida = int.Parse(snap.Child("vida").Value.ToString());
+                
+                maxLife = (float)vida;
+                currentLife = maxLife;
+
+
+            } else
+            {
+                print("Fallo la conexi�n");
+            }
+        });
     }
 
     // Update is called once per frame
@@ -49,8 +83,8 @@ public class PlayerMovement : MonoBehaviour
         Vector3 clampedPosition = transform.position;
         clampedPosition.x = Mathf.Clamp(clampedPosition.x, -12, 12);
         transform.position = clampedPosition;
-
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

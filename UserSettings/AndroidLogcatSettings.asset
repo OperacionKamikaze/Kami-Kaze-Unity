@@ -2,8 +2,8 @@
     "m_SelectedDeviceId": "ZXI75P7DDAEEPR9X",
     "m_SelectedPackage": {
         "deviceId": "ZXI75P7DDAEEPR9X",
-        "name": "com.DefaultCompany.com.unity.template.mobile2D",
-        "processId": 7463,
+        "name": "com.kamikaze.game",
+        "processId": 23416,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -42,6 +42,102 @@
             "deviceId": "ZXI75P7DDAEEPR9X",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 7463,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.DefaultCompany.com.unity.template.mobile2D",
+            "processId": 8084,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 9444,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 10228,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 12462,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 12834,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 13248,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 15262,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 15567,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 16001,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 16660,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 17002,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 17374,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 20984,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 22355,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 22949,
+            "exited": false
+        },
+        {
+            "deviceId": "ZXI75P7DDAEEPR9X",
+            "name": "com.kamikaze.game",
+            "processId": 23416,
             "exited": false
         }
     ],

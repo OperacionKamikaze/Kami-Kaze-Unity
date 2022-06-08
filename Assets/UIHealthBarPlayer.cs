@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using Firebase.Database;
 
 public class UIHealthBarPlayer : MonoBehaviour
 {
@@ -15,14 +16,14 @@ public class UIHealthBarPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthbar.fillAmount = player.currentLife / player.maxLife;
-        if(player.currentLife <=0)
+        healthbar.fillAmount = (player.currentLife / player.maxLife);
+        if (player.currentLife <= 0)
         {
             winText.text = "YOU LOOSE";
         }
