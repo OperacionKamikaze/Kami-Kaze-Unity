@@ -6,7 +6,7 @@ using UnityEngine;
 using Firebase.Database;
 using Firebase.Extensions;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,6 +31,9 @@ public class PlayerMovement : MonoBehaviour
     public int velocidad;
     public int vida;
 
+    public string username;
+    public Text usernameText;
+
     public enemyController enemy;
 
     DatabaseReference reference;
@@ -42,24 +45,30 @@ public class PlayerMovement : MonoBehaviour
 
         maxLife = 5;
         currentLife = maxLife;
-        
-        reference.Child("users").Child("pepito").GetValueAsync().ContinueWith(task =>
+
+        reference.Child("users").GetValueAsync().ContinueWith(task =>
         {
             if(task.IsCompleted)
             {
-                DataSnapshot snap = task.Result;
-                //maxLife = (float)snap.Child("vida").Value;
-                ataque = int.Parse(snap.Child("ataque").Value.ToString());
-                defensa = int.Parse(snap.Child("defensa").Value.ToString());
-                experiencia = int.Parse(snap.Child("experiencia").Value.ToString());
-                oro = int.Parse(snap.Child("oro").Value.ToString());
-                velocidad = int.Parse(snap.Child("velocidad").Value.ToString());
-                vida = int.Parse(snap.Child("vida").Value.ToString());
                 
-                maxLife = (float)vida;
-                currentLife = maxLife;
+                DataSnapshot snap = task.Result;
+                foreach(DataSnapshot childSnap in snap.Children){
+                    if (childSnap.Child("juegoIniciado").Value.ToString().Equals("True")) {
+                        ataque = int.Parse(childSnap.Child("ataque").Value.ToString());
+                        defensa = int.Parse(childSnap.Child("defensa").Value.ToString());
+                        experiencia = int.Parse(childSnap.Child("experiencia").Value.ToString());
+                        oro = int.Parse(childSnap.Child("oro").Value.ToString());
+                        velocidad = int.Parse(childSnap.Child("velocidad").Value.ToString());
+                        vida = int.Parse(childSnap.Child("vida").Value.ToString());
 
-
+                        username = childSnap.Key.ToString();
+                        
+                        maxLife = (float)vida;
+                        currentLife = maxLife;
+                        reference.Child("users").Child(username).Child("juegoIniciado").SetValueAsync(false);
+                    }
+                }
+                usernameText.text = username;
             } else
             {
                 print("Fallo la conexi�n");
@@ -69,8 +78,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-
+    { 
         if (joystick.Horizontal >= .2f)
         {
             transform.Translate(new Vector3(.02f, .0f) * speed);
@@ -116,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void FixedUpdate()
     {
+        usernameText.text = username;
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
     }
     
