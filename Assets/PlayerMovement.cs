@@ -24,6 +24,14 @@ public class PlayerMovement : MonoBehaviour
 
     public float maxLife;
     public float currentLife;
+    public int ataque;
+    public int defensa;
+    public int experiencia;
+    public int oro;
+    public int velocidad;
+    public int vida;
+
+    public enemyController enemy;
 
     DatabaseReference reference;
 
@@ -41,12 +49,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 DataSnapshot snap = task.Result;
                 //maxLife = (float)snap.Child("vida").Value;
-                int ataque = int.Parse(snap.Child("ataque").Value.ToString());
-                int defensa = int.Parse(snap.Child("defensa").Value.ToString());
-                int experiencia = int.Parse(snap.Child("experiencia").Value.ToString());
-                int oro = int.Parse(snap.Child("oro").Value.ToString());
-                int velocidad = int.Parse(snap.Child("velocidad").Value.ToString());
-                int vida = int.Parse(snap.Child("vida").Value.ToString());
+                ataque = int.Parse(snap.Child("ataque").Value.ToString());
+                defensa = int.Parse(snap.Child("defensa").Value.ToString());
+                experiencia = int.Parse(snap.Child("experiencia").Value.ToString());
+                oro = int.Parse(snap.Child("oro").Value.ToString());
+                velocidad = int.Parse(snap.Child("velocidad").Value.ToString());
+                vida = int.Parse(snap.Child("vida").Value.ToString());
                 
                 maxLife = (float)vida;
                 currentLife = maxLife;
@@ -90,7 +98,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.tag == "HitBoxPlayer")
         {
-            currentLife--;
+            float enemyDamage = enemy.ataque - enemy.defensa/2;
+            if(enemyDamage < 0) {
+                enemyDamage = -enemyDamage;
+            }
+            float auxLife = currentLife - enemyDamage;
+            currentLife = auxLife;
             Destroy(collision.gameObject);
 
             if (currentLife <= 0)

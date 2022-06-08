@@ -17,13 +17,26 @@ public class enemyController : MonoBehaviour
 
     public float maxLife;
     public float currentLife;
+    public int ataque;
+    public int defensa;
+    public int experiencia;
+    public int oro;
+    public int velocidad;
+    public PlayerMovement player;
 
     // Start is called before the first frame update
     void Start()
     {
+        maxLife = (float)Random.Range(10, 30);
+        currentLife = maxLife;
+
+        ataque = Random.Range(2, 15);
+        defensa = Random.Range(10, 30);
+        oro = Random.Range(1, 100);
+
         countMovement = Random.Range(1, 3);
         countAttack = Random.Range(1, 3);
-        maxLife = currentLife;
+        
     }
 
     // Update is called once per frame
@@ -37,7 +50,12 @@ public class enemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "HitBoxPlayer")
         {
-            currentLife--;
+            float playerDamage = player.ataque - player.defensa/2;
+            if(playerDamage < 0){
+                playerDamage = -playerDamage;
+            }
+            float auxLife = currentLife - playerDamage;
+            currentLife = auxLife;
             Destroy(collision.gameObject);
 
             if(currentLife <= 0)
